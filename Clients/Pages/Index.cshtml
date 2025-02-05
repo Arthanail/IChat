@@ -1,0 +1,28 @@
+﻿@page
+@model FirstClientModel
+@{
+    ViewData["Title"] = "First Client";
+}
+
+<form method="post">
+    <div class="text-center">
+        <p>Текст:</p>
+        <textarea asp-for="Message" id="message" maxlength="128" placeholder="Type your message (max 128 characters)"></textarea>
+        <div>
+            <p>Порядковый номер:</p>
+            <input type="number" asp-for="SerialNumber"/>
+        </div>
+        <div>
+            <button type="submit">Send</button>
+        </div>
+    </div>
+</form>
+
+@section Scripts {
+    <script>
+        let alertMessage = '@TempData["AlertMessage"]';
+        if (alertMessage) {
+            alert(alertMessage);
+        }
+    </script>
+}

@@ -1,0 +1,42 @@
+﻿services:
+  db:
+    image: postgres
+    restart: always
+    environment:
+      POSTGRES_DB: iChat
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+    ports:
+      - 5432:5432
+    volumes:
+      - ./.containers/postgres_db:/var/lib/postgresql/data
+    networks:
+      - local
+  
+  webapi:
+    build:
+      context: .
+      dockerfile: WebApi/Dockerfile
+    ports:
+      - "5000:8080"
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Development
+    depends_on:
+      - db
+    networks:
+      - local
+  
+  clients:
+    build:
+      context: .
+      dockerfile: Clients/Dockerfile
+    ports:
+      - "5001:8080"
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Development
+    networks:
+      - local
+    
+networks:
+  local:
+    driver: bridge

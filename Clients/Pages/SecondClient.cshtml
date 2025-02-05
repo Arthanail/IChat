@@ -1,0 +1,19 @@
+﻿@page
+@model SecondClient
+@{
+ViewData["Title"] = "Second Client";
+}
+<h1>@ViewData["Title"]</h1>
+
+<div id="messages"></div>
+
+@section Scripts {
+    <script>
+        const socket = new WebSocket("ws://localhost:5000/ws");
+
+        socket.onmessage = function (event) {
+            const messages = document.getElementById("messages");
+            messages.innerHTML += `<p>${event.data}</p>`;
+        };
+    </script>
+}

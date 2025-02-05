@@ -1,0 +1,5 @@
+CREATE TABLE IF NOT EXISTS messages (
+    serialNumber INT PRIMARY KEY,
+    text VARCHAR(128) NOT NULL,
+    dateOfCreation TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);

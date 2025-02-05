@@ -1,0 +1,21 @@
+﻿@page
+@model ThirdClient
+@{
+    ViewData["Title"] = "Third Client";
+}
+<h1>@ViewData["Title"]</h1>
+
+<div id="messages"></div>
+
+@section Scripts {
+    <script>
+        let messages = document.getElementById('messages');
+        let messagesData = @Html.Raw(Json.Serialize(TempData["Messages"]));
+        
+        if (messagesData !== null) {
+            messagesData.forEach(message => {
+                messages.innerHTML += `<p>Serial Number: ${message.serialNumber}, Text: ${message.text}, Date: ${message.dateOfCreation}</p>`;
+            });
+        }
+    </script>
+}
